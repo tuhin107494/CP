@@ -207,6 +207,9 @@ char buffer[N];
 int main()
 {
     hashPre();
+    // if string contains digit , base=10,s[i-1]-'0'
+    
+    
     int t;
     // scanf("%d", &t);
     t=1;
