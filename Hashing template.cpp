@@ -153,7 +153,7 @@ PLL repeat(PLL hash, int len, LL cnt)
 }
 
 ///Calculates hashes of all prefixes of s including empty prefix
-vector<PLL> hashList(string s)
+vector<PLL> hashList(string &s)
 {
     int n = s.size();
     vector<PLL> ans(n+1);
