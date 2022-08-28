@@ -89,7 +89,6 @@ int main()
     while(t--)
     {
         input();
-
     }
     return 0;
 }
