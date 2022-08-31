@@ -64,26 +64,28 @@ long double PI = acosl(-1);
 //void sparse_table(){for(int i=1;i<=n;i++)table[i][0]=a[i];for(int k=1;k<20;k++){for(int i=1;i+(1<<k)-1<=n;i++){table[i][k]=min(table[i][k-1],table[i+(1<<(k-1))][k-1]);}}}
 //int sparse_quary(int l,int r){int len=r-l+1;int k=log2(len);return min(table[l][k],table[r-(1<<k)+1][k]);}
 ///====================================StartHere=================////////////
-bitset<mx8>visited;
-int prime[mx8];
+const int N=mx8;
+bitset<N>visited;
+int prime[N],sz=0;
 void seive()
 {
 
-    for(ll i=4;i<mx8;i+=2)visited[i]=1;
-    for(ll i=3; i*i<mx8; i+=2)
+    for(ll i=4;i<N;i+=2)visited[i]=1;
+    for(ll i=3; i*i<N; i+=2)
     {
         if(visited[i])continue;
-        for(ll j=i*i; j<mx8; j+=(2*i))
+        for(ll j=i*i; j<N; j+=(2*i))
         {
             visited[j]=1;
         }
     }
     prime[0]=2;
     int cnt=1;
-    for(int i=3;i<mx8;i+=2)
+    for(int i=3;i<N;i+=2)
     {
       if(!visited[i])prime[cnt++]=i;
     }
+    sz=cnt;
 }
 
 
