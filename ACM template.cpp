@@ -1208,5 +1208,51 @@ number of way=summation of (indx m=0 to n-k)   (n-m-1)C(k-1);
 //Degree of Time
 
 ans=abs((11*m -60*h)/2);
-
-
+//Template
+#include<bits/stdc++.h>
+using namespace std;
+#define TT ios::sync_with_stdio(false); cin.tie(0);cout.tie(0)
+#define       ll                   long long int
+#define       ull                  unsigned long long int
+#define       vi                   vector<int>
+#define       vc                   vector<char>
+#define       vs                   vector<string>
+#define       vll                  vector<long long int>
+#define       vp                   vector<  pair<int,int> >
+#define       pb                   push_back
+#define       pob                  pop_back
+#define       pll                  pair<long long  int, long long int>
+#define       F                    first
+#define       S                    second
+#define       sc(x)                scanf("%lld",&x)
+#define       sci(x)                scanf("%d",&x)
+#define       sc2(x,y)             scanf("%lld %lld",&x,&y)
+#define       pf                   printf
+#define       min3(a,b,c)          min(a,b<c?b:c)
+#define       max3(a,b,c)          max(a,b>c?b:c)
+#define       all(v)               v.begin(), v.end()
+#define       rall(v)               v.rbegin(), v.rend()
+///============ CONSTANT ===============///
+#define mx18  1000000000000000000
+#define mx9   1000000007
+#define mx8   100000007
+#define mx7   10000006
+#define mx6   1000056
+#define mx5   200005
+#define mx4   10005
+#define inf   1<<30
+#define eps   1e-9
+#define mod   mx9
+ll dx[]= {1,-1,0,0};
+ll dy[]= {0,0,1,-1};
+long double PI = acosl(-1);
+///=============== Debugging ============================///
+#define       debug(x) cerr << #x << " = " << x << endl
+#define       debug2(x, y)             cerr << #x << ": " << x << "  " << #y << ": " << y << endl;
+#define       debug3(x, y, z)          cerr << #x << ": " << x << "  " << #y << ": " << y << "  " << #z << ": " << z << endl;
+#define       debug4(a, b, c, d)       cerr << #a << ": " << a << "  " << #b << ": " << b << "  " << #c << ": " << c << " | " << #d << ": " << d << endl;
+///=====================Bitmask===================///
+//ordered_set st;
+//int Set(int N,int pos){return N=N | (1<<pos);}
+//int reset(int N,int pos){return N= N & ~(1<<pos);}
+//bool check(int N,int pos){return (bool)(N & (1<<pos));}
