@@ -90,6 +90,7 @@ void dfs(ll u,ll d,ll p)
     depth[u]=d;
     low[u]=d;
     pr[u]=p;
+    sz[u]=1;
     for(int i=0; i<v[u].size(); i++)
     {
         if(v[u][i]==p)continue;
@@ -98,6 +99,17 @@ void dfs(ll u,ll d,ll p)
             dfs(v[u][i],d+1,u);
             low[u]=min(low[u],low[v[u][i]]);
 
+            /* if(low[v[u][i]]>depth[u])
+            {
+                //isbridge.pb({node,u});
+                cnt+=(sz[v[u][i]]*(n-sz[v[u][i]]));
+                n-=sz[v[u][i]];
+                sz[v[u][i]]=0;
+            }
+            */
+            sz[u]+=sz[v[u][i]];
+             
+            
         }
         else
         {
