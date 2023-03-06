@@ -299,14 +299,100 @@ void pre_calculation()
             }
         }
     }
-    for(int i=1; i<=1000000; i++)
-    {
-        for(int j=i; j<=1000000; j+=i)
-        {
-            S[j] = S[j] + (ll) (i*phi[i]);
-        }
-    }
+   
 }
+
+/*
+formula
+lcm(1,n)+lcm(2,n)+lcm(3,n)+........lcm(n,n)
+SUM=(n*(∑(ϕ(d)×d)+1))/2; here d is divisor of n
+
+for(int i=1; i<=1000000; i++)
+   for(int j=i; j<=1000000; j+=i)
+       S[j] = S[j] + (ll) (i*phi[i]);
+         cin>>n;
+         res=n*(s[n]+1);
+         res/=2;
+*/
+
+// here  lcm(1,1)    +         lcm(1,2)+lcm(2,2)         +       lcm(1,3)+lcm(2,3)+lcm(3,3) +     ............
+Pseudocode code:  
+/*for( int i = 1; i <= n; i++ )
+     for( int j = i + 1; j <= n; j++ )
+         res += lcm(i, j);*/
+for(int i=1; i<=1000000; i++)
+   for(int j=i; j<=1000000; j+=i)
+       S[j] = S[j] + (ll) (i*phi[i]);
+
+    res[1]=1;
+    res[1]-=1;
+    for(ull i=2; i<3*mx6; i++)
+    {
+     ull tem=(1ull*i*((s[i]-1)/2ull));// lcm(1,n)+lcm(2,n)+lcm(3,n)....lcm(n-1,n)  s[i]-1 k age 2 dara vag then i er sate gun
+        res[i]+=res[i-1]+tem;
+    }
+
+#GCD(i,n)  1<=i<=n-1 
+Pseudocode code: 
+/*for( int i = 1; i <= n; i++ )
+   for( int j = i + 1; j <= n; j++ )
+         res += lcm(i, j);*/
+
+for(int i=1; i<=1000000; i++)
+  for(int j=i; j<=1000000; j+=i)
+     S[j] = S[j] + (ll) (i*phi[j/i]);
+    
+    sum[0]=0;
+ for(int i=1;i<=n;i++)
+    sum[i]=s[i]+sum[i-1];
+
+#L to R  all minimum lcm
+sc(m);sc(n);
+    ll  sz=sqrt(n);
+    for(int i=1;i<=sz;i++)
+    {
+        ll d=(m+i-1)/i;
+        d*=i;
+        if(d>=m and d<=n and (d+i)<=n)
+        {
+            ans=min(ans,1ull*d*(d+i)/i);
+        }
+        d=(m+i-1)/i;
+
+         if(d*i>=m and d*i<=n and d*i +d<=n)
+        {
+            ans=min(ans,1ull*i*d*(i+1));
+        }
+
+    }
+    printf("%llu\n",ans);
+
+#sum of lcm(i,j)=n or lcm of all divisors is n.cpp
+Pseudocode code: 
+/*for( int i = 1; i <= n; i++ )
+   for( int j = i ; j <= n; j++ )
+         if(lcm(i,j)==n)cnt++;
+*/
+ for(int i=0; i<sz and prime[i]*prime[i]<=n; i++)
+      { if(n%prime[i]==0)
+            ll d=prime[i],cnt=0;
+            while(n%d==0)
+            { n/=d;cnt++;
+            }
+            ans*=(2*cnt +1);
+        }
+    if(n>1)ans*=(2 +1);
+    ans++; ans/=2;
+cout<<ans<<endl;
+
+#Array range in range or out of range
+fun(a,b,l,r)
+{
+ca=max(a,l);
+cb=min(b,r);
+if(ca>cb)out of range
+else in range
+
 6.nCr , mod is not prime
 
 ll fac[2*mx7],smallprime[2*mx7],largeprime[2*mx7];
@@ -860,8 +946,6 @@ int main()
         }
     }
 }
-
-
 14.All posible increasing sequence count;
 ll mn[400005],a[400005];
 map<ll,ll>ma;
@@ -994,7 +1078,9 @@ ll big_mod(ll b,ll p,ll m )
     return res;
 }
 17.ALL pair lCM sum
-
+/*3
+2 4 6
+lcm(2,4)+lcm(2,6)+lcm(4,6)=4+6+12=22.*/
 ll cnt[mx6],b[mx6],exact[mx6];
 void seive()
 {
@@ -1206,8 +1292,78 @@ x1+x2+x3+x4...+xk  + m <=n;
 number of way=summation of (indx m=0 to n-k)   (n-m-1)C(k-1);
 
 //Degree of Time
-
 ans=abs((11*m -60*h)/2);
+20.2D prefix sum
+ll prefix[1050][1050],n,m;
+void pre()
+{
+  for(int i=1;i<=n;i++)
+   for(int j=1;j<=m;j++)
+     prefix[i][j]=a[i][j]+prefix[i-1][j]+prefix[i][j-1]-prefix[i-1][j-1];
+}
+
+ll quary(ll x1,ll y1,ll x2,ll y2)
+{
+  return (prefix[x2][y2]-prefix[x1-1][y2]-prefix[x2][y1-1]+prefix[x1-1][y1-1]);
+}
+21.Longest Palindromic Substring O(N) Manacher's Algorithm
+
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+  int i, j, k, n, m;
+  string s;
+  cin >> s;
+  n = s.size();
+  vector<int> d1(n);  // maximum odd length palindrome centered at i
+  // here d1[i]=the palindrome has d1[i]-1 right characters from i
+  // e.g. for aba, d1[1]=2;
+  for (int i = 0, l = 0, r = -1; i < n; i++) {
+    int k = (i > r) ? 1 : min(d1[l + r - i], r - i);
+    while (0 <= i - k && i + k < n && s[i - k] == s[i + k]) {
+      k++;
+    }
+    d1[i] = k--;
+    if (i + k > r) {
+      l = i - k;
+      r = i + k;
+    }
+  }
+  vector<int> d2(n);  // maximum even length palindrome centered at i
+  // here d2[i]=the palindrome has d2[i]-1 right characters from i
+  // e.g. for abba, d2[2]=2;
+  for (int i = 0, l = 0, r = -1; i < n; i++) {
+    int k = (i > r) ? 0 : min(d2[l + r - i + 1], r - i + 1);
+    while (0 <= i - k - 1 && i + k < n && s[i - k - 1] == s[i + k]) {
+      k++;
+    }
+    d2[i] = k--;
+    if (i + k > r) {
+      l = i - k - 1;
+      r = i + k ;
+    }
+  }
+  for(i = 0; i < n; i++) cout << d1[i] << ' ';
+  cout << endl;
+  for(i = 0; i < n; i++) cout << d2[i] << ' ';
+  cout << endl;
+  // number of palindromes
+  long long ans = 0;
+  for(i = 0; i < n; i++) {
+    ans += 1LL * d1[i];
+    ans += 1LL * d2[i];
+  }
+  cout << ans << endl;
+  return 0;
+}
+/*
+aaaaabbbbaaaa
+output:
+1 2 3 2 1 1 2 2 1 1 2 2 1 
+0 1 2 2 1 0 1 6 1 0 1 2 1 
+39
+*/
+
 //Template
 #include<bits/stdc++.h>
 using namespace std;
@@ -1256,3 +1412,6 @@ long double PI = acosl(-1);
 //int Set(int N,int pos){return N=N | (1<<pos);}
 //int reset(int N,int pos){return N= N & ~(1<<pos);}
 //bool check(int N,int pos){return (bool)(N & (1<<pos));}
+
+
+
