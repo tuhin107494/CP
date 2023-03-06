@@ -282,6 +282,7 @@ void input()
 {
     f(0,1);
 }
+
 6.Euler totient phi table
 
 void pre_calculation()
@@ -1293,7 +1294,9 @@ number of way=summation of (indx m=0 to n-k)   (n-m-1)C(k-1);
 
 //Degree of Time
 ans=abs((11*m -60*h)/2);
-20.2D prefix sum
+		  
+20. 2D prefix sum
+		  
 ll prefix[1050][1050],n,m;
 void pre()
 {
@@ -1306,6 +1309,12 @@ ll quary(ll x1,ll y1,ll x2,ll y2)
 {
   return (prefix[x2][y2]-prefix[x1-1][y2]-prefix[x2][y1-1]+prefix[x1-1][y1-1]);
 }
+# 2D difference Array
+		  
+D[x][y]=a[x][y]+a[x-1][y-1]-a[x][y-1]-a[x-1][y];
+		  
+a[x][y] = a[x][y-1] + a[x-1][y] - a[x-1][y-1] + D[x][y];
+		  
 21.Longest Palindromic Substring O(N) Manacher's Algorithm
 
 #include<bits/stdc++.h>
