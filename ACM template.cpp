@@ -1315,6 +1315,19 @@ D[x][y]=a[x][y]+a[x-1][y-1]-a[x][y-1]-a[x-1][y];
 		  
 a[x][y] = a[x][y-1] + a[x-1][y] - a[x-1][y-1] + D[x][y];
 		  
+# Fibonacci 1 to 10^18
+		  
+map<long, long> F;
+long  f(long n) {
+    if (F.count(n)) return F[n];
+    long k=n/2;
+    if (n%2==0) { // n=2*k
+        return F[n] = (f(k)*f(k) + f(k-1)*f(k-1)) % M;
+    } else { // n=2*k+1
+        return F[n] = (f(k)*f(k+1) + f(k-1)*f(k)) % M;
+    }
+}
+		  
 21.Longest Palindromic Substring O(N) Manacher's Algorithm
 
 #include<bits/stdc++.h>
